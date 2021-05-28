@@ -1,12 +1,12 @@
 #!/bin/bash
 # Job name:
-#SBATCH --job-name=ShallowWaterGPUStrongScaling
+#SBATCH --job-name=ShallowWaterGPUScalingDev
 #
 # Project:
 #SBATCH --account=nn9550k
 #
 # Wall clock limit:
-#SBATCH --time=24:00:00
+#SBATCH --time=01:00:00
 #
 # Ask for 1 GPU (max is 2)
 # Note: The environment variable CUDA_VISIBLE_DEVICES will show which GPU 
@@ -19,6 +19,8 @@
 #
 # Number of tasks:
 #SBATCH --nodes=1 --ntasks-per-node=1
+#
+#SBATCH --qos=devel
 
 ## Set up job environment: (this is done automatically behind the scenes)
 ## (make sure to comment '#' or remove the following line 'source ...')

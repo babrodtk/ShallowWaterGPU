@@ -25,11 +25,14 @@ import numpy as np
 import gc
 
 
-def getExtent(width, height, nx, ny, grid):
+def getExtent(width, height, nx, ny, grid, index=None):
     if grid is not None:
         gx = grid.grid[0]
         gy = grid.grid[1]
-        i, j = grid.getCoordinate()
+        if index is not None:
+            i, j = grid.getCoordinate(index)
+        else:
+            i, j = grid.getCoordinate()
         
         dx = (width / gx) / nx
         dy = (height / gy) / ny
@@ -192,7 +195,7 @@ def genShockBubble(nx, ny, gamma, grid=None):
     
     
     
-def genKelvinHelmholtz(nx, ny, gamma, roughness=0.125, grid=None):
+def genKelvinHelmholtz(nx, ny, gamma, roughness=0.125, grid=None, index=None):
     """
     Roughness parameter in (0, 1.0] determines how "squiggly" 
     the interface betweeen the zones is
@@ -234,7 +237,7 @@ def genKelvinHelmholtz(nx, ny, gamma, roughness=0.125, grid=None):
 
 
 
-        x0, x1, y0, y1, _, dy = getExtent(1.0, 1.0, nx, ny, grid)
+        x0, x1, y0, y1, _, dy = getExtent(1.0, 1.0, nx, ny, grid, index)
         x = np.linspace(x0, x1, nx)
         y = np.linspace(y0, y1, ny)
         _, y = np.meshgrid(x, y)
@@ -274,7 +277,7 @@ def genKelvinHelmholtz(nx, ny, gamma, roughness=0.125, grid=None):
     
     E = 0.5*rho*(u**2+v**2) + p/(gamma-1.0)
     
-    _, _, _, _, dx, dy = getExtent(width, height, nx, ny, grid)
+    _, _, _, _, dx, dy = getExtent(width, height, nx, ny, grid, index)
     
     
     bc = BoundaryCondition({

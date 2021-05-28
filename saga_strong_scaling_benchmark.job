@@ -6,7 +6,7 @@
 #SBATCH --account=nn9550k
 #
 # Wall clock limit:
-#SBATCH --time=24:00:00
+#SBATCH --time=10:00:00
 #
 # Ask for 1 GPU (max is 2)
 # Note: The environment variable CUDA_VISIBLE_DEVICES will show which GPU 
@@ -47,5 +47,5 @@ savefile "$SCRATCH/ShallowWaterGPU/*.json"
 ## Do some work:
 cd $SCRATCH/ShallowWaterGPU
 srun $HOME/.conda/envs/ShallowWaterGPU_HPC/bin/python3 --version
-srun $HOME/.conda/envs/ShallowWaterGPU_HPC/bin/python3 mpiTesting.py -nx 8192 -ny 8192 --profile
+srun $HOME/.conda/envs/ShallowWaterGPU_HPC/bin/python3 mpiTesting.py -nx 1024 -ny 1024 --profile
 

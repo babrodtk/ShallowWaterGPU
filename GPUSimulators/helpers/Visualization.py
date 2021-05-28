@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-This python module implements Cuda context handling
+This python module implements visualization techniques/modes
 
 Copyright (C) 2018  SINTEF ICT
 

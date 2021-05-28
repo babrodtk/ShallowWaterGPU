@@ -1,11 +1,10 @@
 #!/bin/bash
 #SBATCH -p dgx2q                   # partition (GPU queue)
 #SBATCH -N 1                       # number of nodes
-#SBATCH -n 4                       # number of cores
+#SBATCH -n 1                       # number of cores
 #SBATCH -w g001                    # DGX-2 node
-#SBATCH --gres=gpu:4               # number of V100's
-#SBATCH --mem 10G                  # memory pool for all cores
-#    #SBATCH -t 0-00:10                 # time (D-HH:MM)
+#SBATCH --gres=gpu:2               # number of V100's
+#SBATCH -t 0-00:10                 # time (D-HH:MM)
 #SBATCH -o slurm.%N.%j.out  # STDOUT
 #SBATCH -e slurm.%N.%j.err  # STDERR
 
@@ -25,7 +24,7 @@ cp -r . /work/$USER/ShallowWaterGPU
 # Run job
 # (Assumes Miniconda is installed in user root dir.)
 cd /work/$USER/ShallowWaterGPU
-mpirun --mca btl_openib_if_include mlx5_0 --mca btl_openib_warn_no_device_params_found 0 $HOME/miniconda3/envs/ShallowWaterGPU_HPC/bin/python3 mpiTesting.py
+mpirun --mca btl_openib_if_include mlx5_0 --mca btl_openib_warn_no_device_params_found 0 $HOME/miniconda3/envs/ShallowWaterGPU_HPC/bin/python3 shmemTesting.py
 cd $HOME/src/ShallowWaterGPU
 
 ## Copy files from work directory:
